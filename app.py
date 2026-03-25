@@ -1,4 +1,4 @@
-
+import os 
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -6,11 +6,13 @@ import joblib
 from rdkit import Chem
 from rdkit.Chem import AllChem
 
-model = joblib.load("model.pkl")
-scaler = joblib.load("scaler.pkl")
-pca = joblib.load("pca.pkl")
-XtX_inv = joblib.load("XtX_inv.pkl")
-h_star = joblib.load("h_star.pkl")
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+model = joblib.load(os.path.join(BASE_DIR, "model.pkl"))
+scaler = joblib.load(os.path.join(BASE_DIR, "scaler.pkl"))
+pca = joblib.load(os.path.join(BASE_DIR, "pca.pkl"))
+XtX_inv = joblib.load(os.path.join(BASE_DIR, "XtX_inv.pkl"))
+h_star = joblib.load(os.path.join(BASE_DIR, "h_star.pkl"))
 
 def smiles_to_ecfp(smiles, nBits=2048):
     mol = Chem.MolFromSmiles(smiles)
